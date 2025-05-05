@@ -69,8 +69,51 @@
     width: 100vw;
     height: 10vh;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 1rem 2rem;
     background-color: #232935;
 
   }
+  .dashboard {
+    width: 30%;
+    border-right: 1px solid white;
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard_img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 6rem;
+  }
+  .dashboard_title {
+    margin-left: 1rem;
+  }
+ 
+  .information {
+    width: 10%;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+  }
+  .chat {
+    width: 10%;
+    border: 1px solid white;
+  }
+  .profile {
+    width: 10%;
+    border: 1px solid white;
+  }
+  .toPin {
+    width: 40%;
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 6rem;
+  }
+  
+  .toPin_img {
+    width: 2rem;
+    height: 2rem;
+  }  
