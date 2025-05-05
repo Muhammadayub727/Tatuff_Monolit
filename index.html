@@ -25,8 +25,16 @@
                     <img src="./images/dashboard.png" alt="dashboard" class="dashboard_img">
                     <p class="dashboard_title">Dashboard</p>
                 </div>
-                <div class="information">
-                    <p><img src="./images/information.png" alt="inf" class="inf_img">Ma'lumotlar</p>
+                <div class="dropdown-wrapper">
+                    <div class="dropdown-toggle" onclick="toggleDropdown(event)">
+                    <span>📊 Ma'lumotlar</span>
+                    <span id="arrow">&#9662;</span>
+                    </div>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#"> O‘quv yillari</a>
+                    <a href="#"> Kafedralar</a>
+                    <a href="#"> O‘qituvchilar</a>
+                    </div>
                 </div>
                 <div class="chat"></div>
                 <div class="profile"></div>
@@ -37,6 +45,6 @@
             </div>
         </main>
     </div>
-<link rel="stylesheet" href="./Javascript/script.js">
+<script src="./Javascript/script.js"></script>
 </body>
 </html>
