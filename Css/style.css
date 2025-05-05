@@ -19,6 +19,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 700;
   }
+  /* Header section */
   .header {
     width: 100vw;
     background-color: #4a64e0; /* fon rangi */
@@ -33,7 +34,7 @@
   .logo {
     width: 3rem;
     height: 3rem;
-    margin-left: 4rem;
+    margin-left: 6rem;
   }
   
   .title {
@@ -53,7 +54,7 @@
     height: 2.5rem;
     background-color: #cdc9c9;
     border-radius: 50%;
-    margin-right: 4rem;
+    margin-right: 6rem;
   }
   
   .user {
@@ -62,4 +63,14 @@
     justify-content: center;
     margin-left: 4px;
     margin-top: 4px;
+  }
+  /*Dashboard*/
+  .top-nav {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #232935;
+
   }
