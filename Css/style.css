@@ -142,8 +142,8 @@
   }
   
   .dropdown-menu a {
-    display: block;
-    font-size: 16px;
+    /* display: block; */
+    /* font-size: 16px; */
     width: 100%;
     color: white;
     padding: 12px 16px;
@@ -173,19 +173,45 @@
   
   .chat {
     width: 10%;
-    border: 1px solid white;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  .chat_img {
+    width: 2rem;
+    height: 2rem;
+  }
+  .chat_title {
+    margin-left: 1rem;
+    font-size:18px;
   }
   .profile {
     width: 10%;
-    border: 1px solid white;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  .profile_img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .profile_title {
+    margin-left: 1rem;
+    font-size:18px;
   }
   .toPin {
-    width: 35%;
+    width: 30%;
     /* border: 1px solid white; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    /* padding-left:rem; */
+    padding-left:6rem;
   }
   
   .toPin_img {
