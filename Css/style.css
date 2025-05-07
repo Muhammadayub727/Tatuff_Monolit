@@ -71,7 +71,9 @@
     /* justify-content: space-between; */
     padding: 1rem 2rem;
     background-color: #232935;
-
+  }
+  .active-nav {
+    color: #FFA500; 
   }
   .dashboard {
     width: 20%;
@@ -262,3 +264,30 @@
     margin-left: 1rem;
     font-size:20px;
   }
+    
+  .breadcrumb-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .breadcrumb {
+    width: 85%;
+    height: 70px;
+    background-color: #1f2937;
+    padding: 10px 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+  }
+  
+  .breadcrumb small {
+    color: #9ca3af;
+    margin-left: 8px;
+  }
+  
