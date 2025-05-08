@@ -269,23 +269,52 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin: 1rem 0;
   }
   
   .breadcrumb {
+    position: relative;
     width: 85%;
     height: 70px;
-    background-color: #1f2937;
-    padding: 10px 30px;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
+    background-color: #1f2937; /* asosiy orqa fon */
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 0 1.5rem;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
     border-radius: 6px;
+    z-index: 1;
+    overflow: hidden;
   }
   
+  /* Chap tomondan qora soyadek effekt */
+  .breadcrumb::before,
+  .breadcrumb::after {
+
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 500px;
+    height: 100%;
+    background-color: #2c3652; /* chap va o‘ng fon */
+    z-index: -1;
+    clip-path: polygon(0 0, 80% 0, 100% 0%, 80% 100%, 0 100%);
+  }
+  
+  .breadcrumb::after {
+    
+    right: -50px;
+    transform: scaleX(-1); /* o‘ng tomonni akslantirish */
+  }
+  
+  .breadcrumb::before {
+    left: -50px;
+  }
+    
   .breadcrumb small {
     color: #9ca3af;
     margin-left: 8px;

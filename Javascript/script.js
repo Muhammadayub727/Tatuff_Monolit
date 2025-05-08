@@ -29,9 +29,6 @@ cards.forEach((card) => {
   });
 });
 
-// document.getElementById("go_back").addEventListener("click", function () {
-//     window.history.back();
-//   });
 document.addEventListener("DOMContentLoaded", function () {
     const navItems = document.querySelectorAll("[data-nav]");
   
@@ -42,4 +39,5 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+  
   
