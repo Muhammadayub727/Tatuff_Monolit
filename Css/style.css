@@ -319,4 +319,9 @@
     color: #9ca3af;
     margin-left: 8px;
   }
-  
+  .teachers_years{
+    width: 85%;
+    height: 410px;
+    background-color: #1f2937;
+    border-radius: 10px;
+  }
