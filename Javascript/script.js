@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const breadcrumbBox = document.getElementById("breadcrumbBox");
   const breadcrumbSub = document.getElementById("breadcrumbSub");
   const breadcrumbMain = document.getElementById("breadcrumbMain");
-  const teachersYears = document.getElementById("teachersYears");
+  const cardList = document.getElementById("cardList");
 
   cards.forEach((card) => {
     card.addEventListener("click", () => {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Breadcrumb va boshqa blocklarni ko‘rsatish
       breadcrumbBox.style.display = "flex";
-      teachersYears.style.display = "block";
+      cardList.style.display = "block";
 
       // Breadcrumb matnlarini yangilash
       const title = card.querySelector(".content_title").innerText;
@@ -52,3 +52,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
   
   
+
+
+const cardList = document.getElementById('cardList');
+    const searchInput = document.getElementById('search');
+
+    const data = [
+      "2024-2025 o‘quv yili",
+      "2024-2025 o‘quv yili",
+      "2024-2025 o‘quv yili",
+      "2024-2025 o‘quv yili"
+    ];
+
+    function createCard(text) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-left">
+          <img src="./images/Bookmark.png" alt="icon">
+          <span>${text}</span>
+        </div>
+        <div class="card-right">
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="icon-btn edit">&#9998;</span>
+          <span class="icon-btn delete">&#128465;</span>
+        </div>
+      `;
+      return card;
+    }
+
+    function loadCards(filter = "") {
+      cardList.innerHTML = '';
+      data.forEach(item => {
+        if (item.toLowerCase().includes(filter.toLowerCase())) {
+          cardList.appendChild(createCard(item));
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', () => {
+      loadCards(searchInput.value);
+    });
+
+    loadCards();
