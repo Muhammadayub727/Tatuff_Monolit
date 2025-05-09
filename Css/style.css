@@ -320,7 +320,7 @@
     color: #9ca3af;
     margin-left: 8px;
   }
-  .card-list{
+  .teachers-years{
     width: 85%;
     height: 600px;
     background-color: #1f2937;
@@ -335,25 +335,28 @@
     width: 300px;
     padding: 12px 20px;
     border-radius: 25px;
-    /* margin-top: 20px; */
+    margin: 20px auto 30px; /* <-- faqat shu qator kerak */
     border: none;
     outline: none;
     background-color: #2c3547;
     color: white;
-    margin: 0 auto 30px;
     display: block;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
+  
 
   .card {
     background-color: #1d2736;
-    border: 1px solid #444;
+    border: 1px solid #514848 ;
     border-radius: 5px;
-    padding: 15px;
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
+    width: 90%;
+    margin: 0 auto 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
 
   .card-left {
@@ -427,4 +430,8 @@
 
   .delete {
     color: red;
+  }
+  .card-text{
+    font-size: 20px;
+    color: white;
   }
