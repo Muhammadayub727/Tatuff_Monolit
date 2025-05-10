@@ -63,7 +63,29 @@
                         <div class="card-list" id="cardList">
                             
                         </div>
+                        <div class="plus-icon" id="addCardButton">
+                            <span class="plus-sign">+</span>
+                        </div>    
+
+                        
                     
+                        <div id="addCardModal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!-- <h2>Yangi o'quv yili yaratish</h2> -->
+                                </div>
+                                <div class="modal-body">
+                                    <label for="newContent">Yangi o'quv yili kiriting:</label>
+                                    <input type="text" id="newContent" name="newContent">
+                                </div>
+                                <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                                    <span class="close-button" style="width: 100px; height: 45px; display: flex; justify-content: center; align-items: center; background-color: red; border-radius: 10px;">&times;</span>
+                                    <button id="saveCard">Saqlash</button>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <!-- Modal -->
                         <div id="editModal" class="modal" style="display:none;">
                             <div class="modal-content">

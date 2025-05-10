@@ -134,3 +134,88 @@ searchInput.addEventListener('input', () => {
 loadCards();
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  const addCardButton = document.getElementById('addCardButton');
+  const addCardModal = document.getElementById('addCardModal');
+  const closeButton = document.querySelector('.close-button');
+  const saveCardButton = document.getElementById('saveCard');
+  const cardList = document.getElementById('cardList');
+  const newContentInput = document.getElementById('newContent');
+
+  // Function to open the modal
+  addCardButton.addEventListener('click', function() {
+      addCardModal.style.display = 'block';
+  });
+
+  // Function to close the modal when the close button is clicked
+  closeButton.addEventListener('click', function() {
+      addCardModal.style.display = 'none';
+  });
+
+  // Function to close the modal if the user clicks outside of it
+  window.addEventListener('click', function(event) {
+      if (event.target == addCardModal) {
+          addCardModal.style.display = 'none';
+      }
+  });
+
+  // Function to create a new card element with actions
+  function createNewCard(text) {
+      const newCard = document.createElement('div');
+      newCard.classList.add('card');
+
+      const textSpan = document.createElement('span');
+      textSpan.classList.add('card-text');
+      textSpan.textContent = text;
+
+      const actionsDiv = document.createElement('div');
+      actionsDiv.classList.add('card-actions');
+
+      const toggleIcon = document.createElement('img');
+      toggleIcon.src = 'path/to/toggle-icon.png'; // Replace with your image path
+      toggleIcon.alt = 'Toggle';
+      toggleIcon.addEventListener('click', function() {
+          alert('Toggle functionality for: ' + text); // Implement your toggle logic
+      });
+
+      const editIcon = document.createElement('img');
+      editIcon.src = 'path/to/edit-icon.png'; // Replace with your image path
+      editIcon.alt = 'Edit';
+      editIcon.addEventListener('click', function() {
+          const currentText = textSpan.textContent;
+          const newText = prompt('Edit card text:', currentText);
+          if (newText !== null) {
+              textSpan.textContent = newText;
+          }
+      });
+
+      const deleteIcon = document.createElement('img');
+      deleteIcon.src = 'path/to/delete-icon.png'; // Replace with your image path
+      deleteIcon.alt = 'Delete';
+      deleteIcon.addEventListener('click', function() {
+          newCard.remove(); // Remove the card
+      });
+
+      actionsDiv.appendChild(toggleIcon);
+      actionsDiv.appendChild(editIcon);
+      actionsDiv.appendChild(deleteIcon);
+
+      newCard.appendChild(textSpan);
+      newCard.appendChild(actionsDiv);
+
+      return newCard;
+  }
+
+  // Function to handle saving the new card from the modal
+  saveCardButton.addEventListener('click', function() {
+      const newText = newContentInput.value.trim();
+      if (newText !== '') {
+          const newCard = createNewCard(newText); // Create the card with icons
+          cardList.appendChild(newCard);
+          newContentInput.value = ''; // Clear the input
+          addCardModal.style.display = 'none'; // Close the modal
+      } else {
+          alert('Please enter some text for the new item.');
+      }
+  });
+});
