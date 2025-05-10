@@ -50,172 +50,145 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
- const data = [
-  "2024-2025 o‘quv yili",
-  "2023-2024 o‘quv yili",
-  "2022-2023 o‘quv yili",
-  "2021-2022 o‘quv yili"
-];
-
-const cardList = document.getElementById('cardList');
-const searchInput = document.getElementById('search');
-
-const editModal = document.getElementById('editModal');
-const editInput = document.getElementById('editInput');
-const saveEditBtn = document.getElementById('saveEditBtn');
-const closeBtn = document.querySelector('.close-btn');
-
-let currentEditingSpan = null; // global saqlanadi
-
-function createCard(text) {
-  const card = document.createElement('div');
-  card.className = 'card';
-
-  card.innerHTML = `
-    <div class="card-left">
-      <img src="./images/Bookmark.png" alt="icon" />
-      <span class="card-text">${text}</span>
-    </div>
-    <div class="card-right">
-      <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider"></span>
-      </label>
-      <span class="icon-btn edit" title="Edit">&#9998;</span>
-      <span class="icon-btn delete" title="Delete">&#128465;</span>
-    </div>
-  `;
-
-  const deleteBtn = card.querySelector('.delete');
-  const editBtn = card.querySelector('.edit');
-  const textSpan = card.querySelector('.card-text');
-
-  deleteBtn.addEventListener('click', () => card.remove());
-
-  editBtn.addEventListener('click', () => {
-    currentEditingSpan = textSpan;
-    editInput.value = textSpan.textContent;
-    editModal.style.display = 'flex';
-  });
-
-  return card;
-}
-
-saveEditBtn.addEventListener('click', () => {
-  if (currentEditingSpan) {
-    currentEditingSpan.textContent = editInput.value;
-    editModal.style.display = 'none';
-  }
-});
-
-closeBtn.addEventListener('click', () => {
-  editModal.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target === editModal) {
-    editModal.style.display = 'none';
-  }
-});
-
-function loadCards(filter = "") {
-  cardList.innerHTML = '';
-  data.forEach(item => {
-    if (item.toLowerCase().includes(filter.toLowerCase())) {
-      cardList.appendChild(createCard(item));
-    }
-  });
-}
-
-searchInput.addEventListener('input', () => {
-  loadCards(searchInput.value);
-});
-
-loadCards();
-
 
 document.addEventListener('DOMContentLoaded', function() {
   const addCardButton = document.getElementById('addCardButton');
   const addCardModal = document.getElementById('addCardModal');
-  const closeButton = document.querySelector('.close-button');
+  const closeAddModalButton = addCardModal.querySelector('.close-button');
   const saveCardButton = document.getElementById('saveCard');
   const cardList = document.getElementById('cardList');
   const newContentInput = document.getElementById('newContent');
 
-  // Function to open the modal
-  addCardButton.addEventListener('click', function() {
-      addCardModal.style.display = 'block';
+  const searchInput = document.getElementById('search');
+  const editModal = document.getElementById('editModal');
+  const editInput = document.getElementById('editInput');
+  const saveEditBtn = document.getElementById('saveEditBtn');
+  const closeEditBtn = editModal.querySelector('.close-btn');
+  let currentEditingSpan = null;
+  const localStorageKey = 'cardListData';
+  let data = JSON.parse(localStorage.getItem(localStorageKey)) || []; // Load data from localStorage
+
+  // Function to save data to localStorage
+  function saveDataToLocalStorage() {
+      localStorage.setItem(localStorageKey, JSON.stringify(data));
+  }
+
+  // Function to create a new card element with actions
+  function createCard(text) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      card.innerHTML = `
+          <div class="card-left">
+              <img src="./images/Bookmark.png" alt="icon" />
+              <span class="card-text">${text}</span>
+          </div>
+          <div class="card-right">
+              <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+              </label>
+              <span class="icon-btn edit" title="Edit">&#9998;</span>
+              <span class="icon-btn delete" title="Delete">&#128465;</span>
+          </div>
+      `;
+
+      const deleteBtn = card.querySelector('.delete');
+      const editBtn = card.querySelector('.edit');
+      const textSpan = card.querySelector('.card-text');
+
+      deleteBtn.addEventListener('click', () => {
+          const index = data.indexOf(textSpan.textContent);
+          if (index > -1) {
+              data.splice(index, 1);
+              saveDataToLocalStorage(); // Save after deletion
+          }
+          card.remove();
+      });
+
+      editBtn.addEventListener('click', () => {
+          currentEditingSpan = textSpan;
+          editInput.value = textSpan.textContent;
+          editModal.style.display = 'flex';
+      });
+
+      return card;
+  }
+
+  function loadCards(filter = "") {
+      cardList.innerHTML = ''; // Clear the list before adding filtered items
+      data.forEach(item => {
+          if (item.toLowerCase().includes(filter.toLowerCase())) {
+              cardList.appendChild(createCard(item));
+          }
+      });
+  }
+
+  searchInput.addEventListener('input', () => {
+      loadCards(searchInput.value);
   });
 
-  // Function to close the modal when the close button is clicked
-  closeButton.addEventListener('click', function() {
+  loadCards(); // Load initial cards from localStorage
+
+  // ==== ADD NEW CARD MODAL FUNCTIONALITY ====
+  addCardButton.addEventListener('click', () => {
+      addCardModal.style.display = 'flex';
+  });
+
+  closeAddModalButton.addEventListener('click', () => {
       addCardModal.style.display = 'none';
+      newContentInput.value = '';
   });
 
-  // Function to close the modal if the user clicks outside of it
-  window.addEventListener('click', function(event) {
-      if (event.target == addCardModal) {
+  window.addEventListener('click', (e) => {
+      if (e.target === addCardModal) {
           addCardModal.style.display = 'none';
+          newContentInput.value = '';
+      }
+      if (e.target === editModal) {
+          editModal.style.display = 'none';
       }
   });
 
-  // Function to create a new card element with actions
-  function createNewCard(text) {
-      const newCard = document.createElement('div');
-      newCard.classList.add('card');
-
-      const textSpan = document.createElement('span');
-      textSpan.classList.add('card-text');
-      textSpan.textContent = text;
-
-      const actionsDiv = document.createElement('div');
-      actionsDiv.classList.add('card-actions');
-
-      const toggleIcon = document.createElement('img');
-      toggleIcon.src = 'path/to/toggle-icon.png'; // Replace with your image path
-      toggleIcon.alt = 'Toggle';
-      toggleIcon.addEventListener('click', function() {
-          alert('Toggle functionality for: ' + text); // Implement your toggle logic
-      });
-
-      const editIcon = document.createElement('img');
-      editIcon.src = 'path/to/edit-icon.png'; // Replace with your image path
-      editIcon.alt = 'Edit';
-      editIcon.addEventListener('click', function() {
-          const currentText = textSpan.textContent;
-          const newText = prompt('Edit card text:', currentText);
-          if (newText !== null) {
-              textSpan.textContent = newText;
-          }
-      });
-
-      const deleteIcon = document.createElement('img');
-      deleteIcon.src = 'path/to/delete-icon.png'; // Replace with your image path
-      deleteIcon.alt = 'Delete';
-      deleteIcon.addEventListener('click', function() {
-          newCard.remove(); // Remove the card
-      });
-
-      actionsDiv.appendChild(toggleIcon);
-      actionsDiv.appendChild(editIcon);
-      actionsDiv.appendChild(deleteIcon);
-
-      newCard.appendChild(textSpan);
-      newCard.appendChild(actionsDiv);
-
-      return newCard;
-  }
-
-  // Function to handle saving the new card from the modal
-  saveCardButton.addEventListener('click', function() {
+  saveCardButton.addEventListener('click', () => {
       const newText = newContentInput.value.trim();
       if (newText !== '') {
-          const newCard = createNewCard(newText); // Create the card with icons
-          cardList.appendChild(newCard);
-          newContentInput.value = ''; // Clear the input
-          addCardModal.style.display = 'none'; // Close the modal
+          data.push(newText); // Add new text to the data array
+          saveDataToLocalStorage(); // Save after adding
+          const newCard = createCard(newText); // Create the card element
+          cardList.appendChild(newCard); // Append the new card to the end
+          newContentInput.value = '';
+          addCardModal.style.display = 'none';
       } else {
           alert('Please enter some text for the new item.');
       }
+  });
+
+  // Allow "Enter" key to trigger the save button in the add modal
+  newContentInput.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+          event.preventDefault(); // Prevent default form submission
+          saveCardButton.click(); // Trigger the save button's click event
+      }
+  });
+
+  // ==== EDIT CARD MODAL FUNCTIONALITY ====
+  saveEditBtn.addEventListener('click', () => {
+      if (currentEditingSpan) {
+          const index = data.indexOf(currentEditingSpan.textContent);
+          if (index > -1) {
+              data[index] = editInput.value; // Update data array
+              saveDataToLocalStorage(); // Save after editing
+          }
+          currentEditingSpan.textContent = editInput.value;
+          editModal.style.display = 'none';
+          loadCards(); // Reload to reflect the edit
+          currentEditingSpan = null;
+      }
+  });
+
+  closeEditBtn.addEventListener('click', () => {
+      editModal.style.display = 'none';
+      currentEditingSpan = null;
   });
 });
