@@ -132,3 +132,5 @@ searchInput.addEventListener('input', () => {
 });
 
 loadCards();
+
+
