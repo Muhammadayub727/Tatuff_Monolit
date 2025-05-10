@@ -50,23 +50,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-  
+ const data = [
+  "2024-2025 o‘quv yili",
+  "2023-2024 o‘quv yili",
+  "2022-2023 o‘quv yili",
+  "2021-2022 o‘quv yili"
+];
+
 const cardList = document.getElementById('cardList');
 const searchInput = document.getElementById('search');
 
-const data = [
-  "2024-2025 o‘quv yili",
-  "2024-2025 o‘quv yili",
-  "2024-2025 o‘quv yili",
-  "2024-2025 o‘quv yili"
-];
+const editModal = document.getElementById('editModal');
+const editInput = document.getElementById('editInput');
+const saveEditBtn = document.getElementById('saveEditBtn');
+const closeBtn = document.querySelector('.close-btn');
+
+let currentEditingSpan = null; // global saqlanadi
 
 function createCard(text) {
   const card = document.createElement('div');
   card.className = 'card';
+
   card.innerHTML = `
     <div class="card-left">
-      <img src="./images/Bookmark.png" alt="icon">
+      <img src="./images/Bookmark.png" alt="icon" />
       <span class="card-text">${text}</span>
     </div>
     <div class="card-right">
@@ -74,12 +81,42 @@ function createCard(text) {
         <input type="checkbox" checked>
         <span class="slider"></span>
       </label>
-      <span class="icon-btn edit">&#9998;</span>
-      <span class="icon-btn delete">&#128465;</span>
+      <span class="icon-btn edit" title="Edit">&#9998;</span>
+      <span class="icon-btn delete" title="Delete">&#128465;</span>
     </div>
   `;
+
+  const deleteBtn = card.querySelector('.delete');
+  const editBtn = card.querySelector('.edit');
+  const textSpan = card.querySelector('.card-text');
+
+  deleteBtn.addEventListener('click', () => card.remove());
+
+  editBtn.addEventListener('click', () => {
+    currentEditingSpan = textSpan;
+    editInput.value = textSpan.textContent;
+    editModal.style.display = 'flex';
+  });
+
   return card;
 }
+
+saveEditBtn.addEventListener('click', () => {
+  if (currentEditingSpan) {
+    currentEditingSpan.textContent = editInput.value;
+    editModal.style.display = 'none';
+  }
+});
+
+closeBtn.addEventListener('click', () => {
+  editModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === editModal) {
+    editModal.style.display = 'none';
+  }
+});
 
 function loadCards(filter = "") {
   cardList.innerHTML = '';
@@ -94,4 +131,4 @@ searchInput.addEventListener('input', () => {
   loadCards(searchInput.value);
 });
 
-loadCards(); 
+loadCards();
