@@ -41,14 +41,24 @@
                     <img src="./images/personchat.png" alt="chat" class="chat_img">
                     <p class="chat_title" data-nav>Chat</p>
                 </div>
-                <div class="profile">
+                    
+                <div class="profile" onclick="toggleProfile()">
                     <img src="./images/user.png" alt="profile" class="profile_img">
                     <p class="profile_title" data-nav>Profile</p>
+                  </div>
                 </div>
-                <div class="toPin">
-                    <img src="./images/toPin.png" alt="toPin" class="toPin_img">
-                    <!-- <p class="toPin_title">To Pin</p> -->
-                </div>
+            
+                <div id="profile-section" class="profile-container">
+                  <div class="profile-content">
+                    <div class="profile-avatar">
+                      <img src="./images/user.png" alt="avatar" />
+                    </div>
+                    <input type="text" placeholder="Ism" />
+                    <input type="text" placeholder="Fam" />
+                    <input type="text" placeholder="Login" />
+                    <input type="password" placeholder="Parol" />
+                    <button class="save-btn">Saqlash</button>
+                  </div>
             </div>
             <div class="content">
                 <div class="breadcrumb-box" id="breadcrumbBox" style="display: none;">

@@ -191,3 +191,22 @@
         currentEditingSpan = null;
     });
     });
+    function toggleProfile() {
+        const profileSection = document.getElementById("profile-section");
+        const breadcrumbBox = document.getElementById("breadcrumbBox");
+        const content = document.querySelector(".content"); // Barcha content_cards shu yerda
+      
+        const isVisible = profileSection.style.display === "block";
+      
+        if (isVisible) {
+          profileSection.style.display = "none";
+          breadcrumbBox.style.display = "none";
+          content.style.display = "flex"; // Yana contentni ko‘rsatamiz
+        } else {
+          profileSection.style.display = "block";
+          breadcrumbBox.style.display = "block";
+          content.style.display = "none"; // content_cards'ni yashiramiz
+        }
+      }
+      
+  

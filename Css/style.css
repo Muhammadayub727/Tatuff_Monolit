@@ -583,17 +583,86 @@
   opacity: 1;
 }
 
-/* Umumiy stillar (agar yo'q bo'lsa) */
-.breadcrumb-box {
-  padding: 15px;
-  margin-bottom: 15px;
-  background-color: #282a36;
+.profile_img {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+.profile_title {
+  font-weight: 500;
+}
+
+/* Profil konteyneri */
+.profile-container {
+  background-color: #1e1e2f;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  width: 85%;
+  display: none;
+}
+
+.profile-container.show {
+  display: block;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-content input {
+  background-color: #2e2e3e;
+  border: none;
+  padding: 0.8rem;
   border-radius: 5px;
+  color: #fff;
 }
 
-.breadcrumb-box h2 {
-  color: #f8f8f2;
-  margin: 0;
-  font-size: 1.5em;
+.save-btn {
+  align-self: flex-end;
+  background-color: transparent;
+  border: 1px solid orange;
+  padding: 0.5rem 1rem;
+  color: orange;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#main-content {
+  padding: 2rem;
 }
 
+.btn {
+  background-color: #2a2a3a;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  border-radius: 4px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
