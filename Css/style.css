@@ -589,13 +589,14 @@
   margin-right: 0.5rem;
 }
 
+
 .profile_title {
   font-weight: 500;
 }
 
 /* Profil konteyneri */
 .profile-container {
-  background-color: #1e1e2f;
+  background-color:#232935;
   padding: 2rem;
   border-radius: 8px;
   margin: 2rem auto;
@@ -615,8 +616,8 @@
 }
 
 .profile-avatar {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border: 2px dashed #ccc;
   display: flex;
   align-items: center;
@@ -633,7 +634,7 @@
 }
 
 .profile-content input {
-  background-color: #2e2e3e;
+  background-color: #29303F;
   border: none;
   padding: 0.8rem;
   border-radius: 5px;
