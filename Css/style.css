@@ -668,61 +668,69 @@
   display: none;
 }
 
-
 .chat-window {
   background-color: #232935;
-  width:81.5%; /* Umumiy 15% (7.5% + 7.5%) olib tashlanadi */
-  max-width: none; /* Maksimal kenglikni olib tashlaymiz */
+  width: 81.5%; /* Beligланган kenglik */
+  max-width: none;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  display: flex; /* Bolalarni yonma-yon joylashtirish uchun */
   position: fixed;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  height: 60vh; /* Ekran balandligining 60% ini egallaydi, 100% juda katta bo'lishi mumkin */
+}
+
+.chatLeft_window {
+  background-color: #29303F;
+  width: 30%;
+  height: 100%; /* Ota element balandligining 100% ini egallaydi */
+  padding: 10px;
+  border-radius: 10px 0 0 10px;
+  box-sizing: border-box; /* Padding balandlikka ta'sir qilmasligi uchun */
+}
+
+.chatRight_window {
+  display: flex;
+  flex-direction: column; /* Xabarlar va inputni ustma-ust joylashtirish uchun */
+  width: 70%; /* Qolgan 70% joyni egallaydi */
+  height: 100%; /* Ota element balandligining 100% ini egallaydi */
 }
 
 .messages-container {
-  flex-grow: 1;
+  flex-grow: 1; /* Bo'sh joyni to'ldirish uchun */
   overflow-y: auto;
-  padding-bottom: 10px;
-}
-
-.message {
-  background-color: #2c3547;
-  color: #fff;
   padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  word-break: break-word;
+  box-sizing: border-box; /* Padding kenglikka ta'sir qilmasligi uchun */
+  /* border-bottom: 1px solid #444; Agar input tepasida chiziq bo'lsa, bu qatorni olib tashlang */
 }
 
 .input-area {
   display: flex;
   align-items: center;
-  margin-top: 15px;
+
+  padding: 10px;
+  /* border-top: 1px solid #444; Bu chiziqni olib tashlaymiz */
+  box-sizing: border-box; /* Padding kenglikka ta'sir qilmasligi uchun */
 }
 
-.input-area input {
+.input-area input[type="text"] {
   flex-grow: 1;
   padding: 10px;
   border: none;
   border-radius: 8px;
-  background-color: #1d2736;
+  background-color: #29303F;
   color: #fff;
   margin-right: 10px;
 }
 
-.telegram-icon {
-  background-image: url('./images/telegram-icon.png');
+.input-area img#sendButton {
   width: 40px;
   height: 40px;
-  border: none;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-size: contain;
+  border-radius: 10px;
   cursor: pointer;
+  background-color: #29303F;
+  border: none;
 }
