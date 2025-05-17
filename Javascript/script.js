@@ -1,4 +1,5 @@
-    document.addEventListener("DOMContentLoaded", function () {
+   
+   document.addEventListener("DOMContentLoaded", function () {
     // ==== DROPDOWN FUNCTIONALITY ====
     const dropdownToggle = document.querySelector(".dropdown-toggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
