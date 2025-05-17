@@ -209,3 +209,72 @@
         }
 }
 
+const sendButton = document.getElementById('sendButton');
+const messageInput = document.getElementById('messageInput');
+const messagesContainer = document.getElementById('messages');
+const chatWindow = document.getElementById('chatWindow');
+const chatCard = document.getElementById('chatCard');
+const topnavChat = document.querySelector('.chat');
+const breadcrumbBox = document.getElementById('breadcrumbBox');
+const breadcrumbMain = document.getElementById('breadcrumbMain');
+const breadcrumbSub = document.getElementById('breadcrumbSub');
+const contentCards = document.querySelectorAll('.content_cards'); // Barcha content cardlarni olish
+const teachersYears = document.getElementById('teachersYears'); // O'quv yillari divi
+
+sendButton.addEventListener('click', () => {
+    const messageText = messageInput.value.trim();
+    if (messageText !== '') {
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('message');
+        newMessage.textContent = messageText;
+        messagesContainer.appendChild(newMessage);
+        messageInput.value = '';
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+});
+
+messageInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        sendButton.click();
+    }
+});
+
+function openChat() {
+    // Barcha content cardlarni yashirish
+    contentCards.forEach(card => card.style.display = "none");
+    teachersYears.style.display = "none"; // Agar ochiq bo'lsa, yashirish
+    breadcrumbBox.style.display = "flex";
+    breadcrumbMain.innerText = "Chat";
+    breadcrumbSub.innerText = "/ Chat";
+    chatWindow.style.display = 'flex';
+}
+
+// Topnavdagi "Chat" click hodisasi
+if (topnavChat) {
+    topnavChat.addEventListener('click', openChat);
+}
+
+// Content carddagi "Chat" click hodisasi
+if (chatCard) {
+    chatCard.addEventListener('click', openChat);
+}
+
+// Boshqa content cardlarga click hodisasi (breadcrumbni ko'rsatish uchun)
+contentCards.forEach(card => {
+    if (card.id !== 'chatCard') { // Chat carddan tashqari
+        card.addEventListener('click', () => {
+            contentCards.forEach(c => c.style.display = "none");
+            teachersYears.style.display = "none";
+            breadcrumbBox.style.display = "flex";
+            const title = card.querySelector(".content_title").innerText;
+            breadcrumbMain.innerText = title;
+            breadcrumbSub.innerText = `/ ${title}`;
+            chatWindow.style.display = 'none'; // Chat oynasini yashirish
+            if (title === "O'quv yillari") {
+                teachersYears.style.display = "block";
+            } else {
+                // Boshqa bo'limlar uchun logika
+            }
+        });
+    }
+});
