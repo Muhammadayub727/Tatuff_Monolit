@@ -207,6 +207,5 @@
           breadcrumbBox.style.display = "block";
           content.style.display = "none"; // content_cards'ni yashiramiz
         }
-      }
-      
-  
+}
+
