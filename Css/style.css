@@ -671,7 +671,7 @@
 
 .chat-window {
   background-color: #232935;
-  width:80%; /* Umumiy 15% (7.5% + 7.5%) olib tashlanadi */
+  width:81.5%; /* Umumiy 15% (7.5% + 7.5%) olib tashlanadi */
   max-width: none; /* Maksimal kenglikni olib tashlaymiz */
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -679,7 +679,7 @@
   flex-direction: column;
   padding: 20px;
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
