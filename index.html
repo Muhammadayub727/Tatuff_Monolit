@@ -128,16 +128,31 @@
                 </div>
                 <div class="chat-window" id="chatWindow" style="display: none; margin-top: 20px;">
                     <div class="chatLeft_window">
-
+                        <div class="user-list">
+                            <div class="user-item">Foydalanuvchi 1</div>
+                            <div class="user-item">Foydalanuvchi 2</div>
+                            <div class="user-item">Foydalanuvchi 3</div>
+                        </div>
+                        <div class="add-user-button">+</div>
                     </div>
-                    <div class="messages-container" id="messages">
+                    <div class="chatRight_window">
+                        <div class="messages-container" id="messages">
+                            </div>
                         <div class="input-area">
                             <input type="text" id="messageInput" placeholder="Xabar yozing...">
                             <img src="./images/telegram-icon.png" alt="" id="sendButton">
                         </div>
                     </div>
                 </div>
-            
+                
+                <div id="addUserModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <h3 style="font-size: 24px;">Yangi foydalanuvchi qo'shish</h3>
+                        <input type="text" id="newUsername" placeholder="Foydalanuvchi ismi">
+                        <button id="addUserBtn">Qo'shish</button>
+                    </div>
+                </div>
 
                 <div class="content_cards">
                     <img src="./images/year.png" alt="" class="content_icon">

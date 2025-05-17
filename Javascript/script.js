@@ -208,7 +208,6 @@
           content.style.display = "none"; // content_cards'ni yashiramiz
         }
 }
-
 const sendButton = document.getElementById('sendButton');
 const messageInput = document.getElementById('messageInput');
 const messagesContainer = document.getElementById('messages');
@@ -218,8 +217,59 @@ const topnavChat = document.querySelector('.chat');
 const breadcrumbBox = document.getElementById('breadcrumbBox');
 const breadcrumbMain = document.getElementById('breadcrumbMain');
 const breadcrumbSub = document.getElementById('breadcrumbSub');
-const contentCards = document.querySelectorAll('.content_cards'); // Barcha content cardlarni olish
-const teachersYears = document.getElementById('teachersYears'); // O'quv yillari divi
+const contentCards = document.querySelectorAll('.content_cards');
+const teachersYears = document.getElementById('teachersYears');
+const addUserButton = document.querySelector('.add-user-button');
+const addUserModal = document.getElementById('addUserModal');
+const closeButton = addUserModal.querySelector('.close-button');
+const newUsernameInput = document.getElementById('newUsername');
+const addUserBtn = document.getElementById('addUserBtn');
+const userList = document.querySelector('.user-list');
+
+let messageCount = 0;
+const STORAGE_KEY = 'chatMessages';
+
+// Xabarlarni localstoragega saqlash funksiyasi
+function saveMessage(message) {
+    const messages = getMessages();
+    messages.push(message);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+}
+
+// Localstoragedan xabarlarni olish funksiyasi
+function getMessages() {
+    const storedMessages = localStorage.getItem(STORAGE_KEY);
+    return storedMessages ? JSON.parse(storedMessages) : [];
+}
+
+// Sahifa yuklanganda xabarlarni yuklash funksiyasi
+function loadMessages() {
+    const messages = getMessages();
+    messages.forEach(messageText => {
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('message');
+        newMessage.style.fontSize = '18px';
+
+        if (messageCount % 2 === 0) {
+            newMessage.classList.add('message-left');
+        } else {
+            newMessage.classList.add('message-right');
+        }
+
+        messagesContainer.prepend(newMessage);
+        messageCount++;
+
+        if (messageCount % 10 === 0) {
+            const breakLeft1 = document.createElement('div');
+            breakLeft1.classList.add('message-left', 'message-break');
+            messagesContainer.prepend(breakLeft1);
+
+            const breakLeft2 = document.createElement('div');
+            breakLeft2.classList.add('message-left', 'message-break');
+            messagesContainer.prepend(breakLeft2);
+        }
+    });
+}
 
 sendButton.addEventListener('click', () => {
     const messageText = messageInput.value.trim();
@@ -227,9 +277,28 @@ sendButton.addEventListener('click', () => {
         const newMessage = document.createElement('div');
         newMessage.classList.add('message');
         newMessage.textContent = messageText;
-        messagesContainer.appendChild(newMessage);
+        newMessage.style.fontSize = '18px';
+
+        if (messageCount % 2 === 0) {
+            newMessage.classList.add('message-left');
+        } else {
+            newMessage.classList.add('message-right');
+        }
+
+        messagesContainer.prepend(newMessage); // Xabarni tepaga qo'shish
         messageInput.value = '';
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        saveMessage(messageText); // Saqlash
+        messageCount++; // Har bir xabardan keyin hisoblagichni oshirish
+
+        if (messageCount % 10 === 0) {
+            const breakLeft1 = document.createElement('div');
+            breakLeft1.classList.add('message-left', 'message-break');
+            messagesContainer.prepend(breakLeft1);
+
+            const breakLeft2 = document.createElement('div');
+            breakLeft2.classList.add('message-left', 'message-break');
+            messagesContainer.prepend(breakLeft2);
+        }
     }
 });
 
@@ -240,28 +309,24 @@ messageInput.addEventListener('keypress', (event) => {
 });
 
 function openChat() {
-    // Barcha content cardlarni yashirish
     contentCards.forEach(card => card.style.display = "none");
-    teachersYears.style.display = "none"; // Agar ochiq bo'lsa, yashirish
+    teachersYears.style.display = "none";
     breadcrumbBox.style.display = "flex";
     breadcrumbMain.innerText = "Chat";
     breadcrumbSub.innerText = "/ Chat";
     chatWindow.style.display = 'flex';
 }
 
-// Topnavdagi "Chat" click hodisasi
 if (topnavChat) {
     topnavChat.addEventListener('click', openChat);
 }
 
-// Content carddagi "Chat" click hodisasi
 if (chatCard) {
     chatCard.addEventListener('click', openChat);
 }
 
-// Boshqa content cardlarga click hodisasi (breadcrumbni ko'rsatish uchun)
 contentCards.forEach(card => {
-    if (card.id !== 'chatCard') { // Chat carddan tashqari
+    if (card.id !== 'chatCard') {
         card.addEventListener('click', () => {
             contentCards.forEach(c => c.style.display = "none");
             teachersYears.style.display = "none";
@@ -269,12 +334,54 @@ contentCards.forEach(card => {
             const title = card.querySelector(".content_title").innerText;
             breadcrumbMain.innerText = title;
             breadcrumbSub.innerText = `/ ${title}`;
-            chatWindow.style.display = 'none'; // Chat oynasini yashirish
+            chatWindow.style.display = 'none';
             if (title === "O'quv yillari") {
                 teachersYears.style.display = "block";
-            } else {
-                // Boshqa bo'limlar uchun logika
             }
         });
     }
 });
+
+// Modal oynani ochish
+addUserButton.addEventListener('click', () => {
+    addUserModal.style.display = "block";
+});
+
+// Modal oynani yopish (x tugmasi)
+closeButton.addEventListener('click', () => {
+    addUserModal.style.display = "none";
+});
+
+// Modal oynani yopish (tashqariga bosilganda)
+window.addEventListener('click', (event) => {
+    if (event.target == addUserModal) {
+        addUserModal.style.display = "none";
+    }
+});
+
+// Yangi foydalanuvchi qo'shish
+addUserBtn.addEventListener('click', () => {
+    const newUsername = newUsernameInput.value.trim();
+    if (newUsername !== '') {
+        const newUserDiv = document.createElement('div');
+        newUserDiv.classList.add('user-item');
+        newUserDiv.textContent = newUsername;
+        userList.appendChild(newUserDiv);
+        newUsernameInput.value = '';
+        addUserModal.style.display = "none";
+    }
+});
+
+newUsernameInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        addUserBtn.click();
+    }
+});
+
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        addUserModal.style.display = "none";
+    }
+});
+
+loadMessages();
