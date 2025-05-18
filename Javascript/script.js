@@ -208,6 +208,8 @@ document.addEventListener("DOMContentLoaded", function () {
           content.style.display = "none"; // content_cards'ni yashiramiz
         }
 }
+
+
 const sendButton = document.getElementById('sendButton');
 const messageInput = document.getElementById('messageInput');
 const messagesContainer = document.getElementById('messages');

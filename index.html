@@ -41,21 +41,12 @@
                     <img src="./images/personchat.png" alt="chat" class="chat_img">
                     <p class="chat_title" data-nav>Chat</p>
                 </div>
-                <!-- <div class="chat-window" id="chatWindow" style="display: none; margin-top: 20px;">
-                    <div class="messages-container" id="messages">
-                    </div>
-                    <div class="input-area">
-                        <input type="text" id="messageInput" placeholder="Xabar yozing...">
-                       <img src="./images/telegram-icon.png" alt="d" id="sendButton">
-                    </div>
-                </div>             -->
-
                 <div class="profile" onclick="toggleProfile()">
                     <img src="./images/user.png" alt="profile" class="profile_img">
                     <p class="profile_title" data-nav>Profile</p>
                   </div>
                 </div>
-            
+
                 <div id="profile-section" class="profile-container">
                   <div class="profile-content">
                     <div class="profile-avatar">
@@ -69,8 +60,6 @@
                   </div>
             </div>
 
-            
-
             <div class="content">
                 <div class="breadcrumb-box" id="breadcrumbBox" style="display: none;">
                     <div class="breadcrumb">
@@ -78,23 +67,20 @@
                         <p id="breadcrumbSub">/ O‘quv yillari</p>
                     </div>
                     </div>
-                    
+
                     <div class="teachers-years" id="teachersYears" style="display: none;">
                         <input type="text" id="search" placeholder="Search">
                         <div class="card-list" id="cardList">
-                            
+
                         </div>
                         <div class="plus-icon" id="addCardButton">
                             <span class="plus-sign">+</span>
-                        </div>    
+                        </div>
 
-                        
-                    
                         <div id="addCardModal" class="modal">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <!-- <h2>Yangi o'quv yili yaratish</h2> -->
-                                </div>
+                                    </div>
                                 <div class="modal-body">
                                     <label for="newContent">Yangi o'quv yili kiriting:</label>
                                     <input type="text" id="newContent" name="newContent">
@@ -106,8 +92,6 @@
                             </div>
                         </div>
 
-
-                        <!-- Modal -->
                         <div id="editModal" class="modal" style="display:none;">
                             <div class="modal-content">
                             <span class="close-btn">&times;</span>
@@ -116,7 +100,7 @@
                             <button id="saveEditBtn">Save</button>
                             </div>
                         </div>
-  
+
                     </div>
                 <div class="content_cards">
                     <img src="./images/information.png" alt="" class="content_icon">
@@ -144,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="addUserModal" class="modal" style="display: none;">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
@@ -158,7 +142,7 @@
                     <img src="./images/year.png" alt="" class="content_icon">
                     <p class="content_title">O'quv yillari</p>
                 </div>
-                <div class="content_cards">
+                <div class="content_cards" id="kafedralarCard">
                     <img src="./images/humans.png" alt="" class="content_icon">
                     <p class="content_title">Kafedralar</p>
                 </div>
@@ -183,6 +167,19 @@
             </div>
         </main>
     </div>
+
+    <div id="kafedralarModal" class="modal" style="display: none;">
+        <div class="modal-content" style="width: 85%; height: 450px;">
+            <span class="close-btn" id="closeKafedraModal">&times;</span>
+            <div class="breadcrumb-box">
+                <h2>Malumotlar / Kafedralar</h2>
+            </div>
+            <div id="kafedralarContent" style="height: calc(450px - 60px); overflow-y: auto; padding: 15px;">
+                <p>Kafedralar bo'limiga xush kelibsiz! Bu yerda kafedralar haqida ma'lumotlar bo'ladi.</p>
+                </div>
+        </div>
+    </div>
+
 <script src="./Javascript/script.js"></script>
 </body>
 </html>
