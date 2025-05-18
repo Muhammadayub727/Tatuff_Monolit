@@ -1,34 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ==== DROPDOWN FUNCTIONALITY ====
+    // Elementlarni olish
     const dropdownToggle = document.querySelector(".dropdown-toggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const arrow = document.getElementById("arrow");
-
-    if (dropdownToggle) {
-        dropdownToggle.addEventListener("click", function (e) {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle("show-menu");
-            arrow.classList.toggle("rotate");
-        });
-    }
-
-    document.addEventListener("click", function (e) {
-        if (dropdownToggle && !dropdownToggle.contains(e.target)) {
-            dropdownMenu.classList.remove("show-menu");
-            arrow.classList.remove("rotate");
-        }
-    });
-
-    // ==== NAVIGATION ACTIVE CLASS ====
     const navItems = document.querySelectorAll("[data-nav]");
-    navItems.forEach(item => {
-        item.addEventListener("click", function () {
-            navItems.forEach(el => el.classList.remove("active-nav"));
-            this.classList.add("active-nav");
-        });
-    });
-
-    // ==== CONTENT CARDS CLICK FUNCTIONALITY ====
     const contentCards = document.querySelectorAll(".content_cards");
     const breadcrumbBox = document.getElementById("breadcrumbBox");
     const breadcrumbSub = document.getElementById("breadcrumbSub");
@@ -48,7 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentEditingSpan = null;
     const localStorageKey = 'cardListData';
     let data = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+    const kafedralarCard = document.getElementById("kafedralarCard");
+    const teachersCard = document.getElementById("teachersCard");
+    const fixedBottomRight = document.getElementById("fixedBottomRight");
 
+    // Funksiyalar
     function saveDataToLocalStorage() {
         localStorage.setItem(localStorageKey, JSON.stringify(data));
     }
@@ -74,11 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const editBtn = card.querySelector('.edit');
         const textSpan = card.querySelector('.card-text');
         deleteBtn.addEventListener('click', () => {
-            const index = data.indexOf(textSpan.textContent);
-            if (index > -1) {
-                data.splice(index, 1);
-                saveDataToLocalStorage();
-            }
+            data = data.filter(item => item !== textSpan.textContent);
+            saveDataToLocalStorage();
             card.remove();
         });
         editBtn.addEventListener('click', () => {
@@ -91,122 +67,124 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function loadCards(filter = "") {
         cardList.innerHTML = '';
-        const storedData = localStorage.getItem(localStorageKey);
-        if (storedData) {
-            data = JSON.parse(storedData);
+        const filteredData = data.filter(item => item.toLowerCase().includes(filter.toLowerCase()));
+        filteredData.forEach(item => cardList.appendChild(createCard(item)));
+    }
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.content > div');
+        sections.forEach(section => section.style.display = 'none');
+        const sectionToShow = document.getElementById(sectionId);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
         }
-        data.forEach(item => {
-            if (item.toLowerCase().includes(filter.toLowerCase())) {
-                cardList.appendChild(createCard(item));
-            }
+        breadcrumbBox.style.display = sectionId !== 'dashboard' && sectionId !== 'profile-section' ? 'flex' : 'none';
+        fixedBottomRight.style.display = sectionId === 'teachersYears' ? 'flex' : 'none';
+    }
+
+    // Event listeners
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle("show-menu");
+            arrow.classList.toggle("rotate");
         });
     }
 
-    searchInput.addEventListener('input', () => {
-        loadCards(searchInput.value);
+    document.addEventListener("click", (e) => {
+        if (dropdownToggle && !dropdownToggle.contains(e.target)) {
+            dropdownMenu.classList.remove("show-menu");
+            arrow.classList.remove("rotate");
+        }
+        if (e.target === addCardModal) addCardModal.style.display = 'none';
+        if (e.target === editModal) editModal.style.display = 'none';
     });
 
-    loadCards();
-
-    contentCards.forEach((card) => {
-        card.addEventListener("click", () => {
-            // Barcha content cardlarni yashirish
-            contentCards.forEach(c => c.style.display = "none");
-
-            // Breadcrumb va boshqa blocklarni ko‘rsatish
-            breadcrumbBox.style.display = "flex";
-
-            const title = card.querySelector(".content_title").innerText;
-            breadcrumbMain.innerText = title;
-            breadcrumbSub.innerText = `/ ${title}`;
-
-            if (title === "O'quv yillari") {
-                teachersYears.style.display = "block";
-            } else {
-                teachersYears.style.display = "none"; // O'quv yillari emas bo'lsa yashirish
-                // Bu yerda boshqa contentni ko'rsatish yoki 404 xabarini chiqarish mumkin
-                cardList.innerHTML = '<p>Hozircha bu bo‘limda ma’lumot yo‘q.</p>'; // Misol uchun
+    navItems.forEach(item => {
+        item.addEventListener("click", function () {
+            navItems.forEach(el => el.classList.remove("active-nav"));
+            this.classList.add("active-nav");
+            const target = this.getAttribute('data-nav').toLowerCase();
+            breadcrumbMain.innerText = target.charAt(0).toUpperCase() + target.slice(1);
+            breadcrumbSub.innerText = '';
+            showSection(target === 'ma\'lumotlar' ? 'teachersYears' : target + 'Section');
+            if (target === 'ma\'lumotlar') {
+                loadCards(searchInput.value);
             }
         });
     });
 
-    // ==== ADD NEW CARD MODAL FUNCTIONALITY ====
-    addCardButton.addEventListener('click', () => {
-        addCardModal.style.display = 'flex';
+    contentCards.forEach((card) => {
+        card.addEventListener("click", () => {
+            const title = card.querySelector(".content_title").innerText;
+            breadcrumbMain.innerText = "Ma'lumotlar";
+            breadcrumbSub.innerText = `/ ${title}`;
+            showSection('teachersYears');
+            loadCards('');
+            fixedBottomRight.style.display = title === "O'quv yillari" ? 'flex' : 'none';
+        });
     });
 
-    closeAddModalButton.addEventListener('click', () => {
-        addCardModal.style.display = 'none';
-        newContentInput.value = '';
-    });
+    searchInput.addEventListener('input', () => loadCards(searchInput.value));
+    loadCards();
 
-    window.addEventListener('click', (e) => {
-        if (e.target === addCardModal) {
-            addCardModal.style.display = 'none';
-            newContentInput.value = '';
-        }
-        if (e.target === editModal) {
-            editModal.style.display = 'none';
-        }
-    });
-
+    addCardButton.addEventListener('click', () => addCardModal.style.display = 'flex');
+    closeAddModalButton.addEventListener('click', () => addCardModal.style.display = 'none');
     saveCardButton.addEventListener('click', () => {
         const newText = newContentInput.value.trim();
-        if (newText !== '') {
+        if (newText) {
             data.push(newText);
             saveDataToLocalStorage();
-            const newCard = createCard(newText);
-            cardList.appendChild(newCard);
+            cardList.appendChild(createCard(newText));
             newContentInput.value = '';
             addCardModal.style.display = 'none';
         } else {
             alert('Iltimos, yangi o‘quv yilini kiriting!');
         }
     });
-
-    newContentInput.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            saveCardButton.click();
-        }
+    newContentInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') saveCardButton.click();
     });
 
-    // ==== EDIT CARD MODAL FUNCTIONALITY ====
     saveEditBtn.addEventListener('click', () => {
         if (currentEditingSpan) {
             const index = data.indexOf(currentEditingSpan.textContent);
             if (index > -1) {
                 data[index] = editInput.value;
                 saveDataToLocalStorage();
+                currentEditingSpan.textContent = editInput.value;
+                loadCards(searchInput.value);
             }
-            currentEditingSpan.textContent = editInput.value;
             editModal.style.display = 'none';
-            loadCards(searchInput.value);
             currentEditingSpan = null;
         }
     });
+    closeEditBtn.addEventListener('click', () => editModal.style.display = 'none');
 
-    closeEditBtn.addEventListener('click', () => {
-        editModal.style.display = 'none';
-        currentEditingSpan = null;
+    window.toggleProfile = function () {
+        showSection('profile-section');
+    };
+
+    // Yangi divni ko'rsatish uchun (agar kerak bo'lsa, qaysi bo'limda ko'rsatilishini aniqlang)
+    // Misol uchun, "O'quv yillari" bo'limida ko'rsatish:
+    const oquvYillariCard = document.querySelector('.content_cards:nth-child(4)');
+    if (oquvYillariCard) {
+        oquvYillariCard.addEventListener('click', () => {
+            fixedBottomRight.style.display = 'flex';
+        });
+    } else {
+        fixedBottomRight.style.display = 'none'; // Boshqa hollarda yashirish
+    }
+
+    // "+" ikonkasiga event listener qo'shishingiz mumkin, masalan:
+    fixedBottomRight.addEventListener('click', () => {
+        alert('Yangi element qo‘shish funksiyasi');
+        // Bu yerga yangi element qo'shish logikasini yozishingiz mumkin
     });
-    });
-    function toggleProfile() {
-        const profileSection = document.getElementById("profile-section");
-        const breadcrumbBox = document.getElementById("breadcrumbBox");
-        const content = document.querySelector(".content"); // Barcha content_cards shu yerda
-      
-        const isVisible = profileSection.style.display === "block";
-      
-        if (isVisible) {
-          profileSection.style.display = "none";
-          breadcrumbBox.style.display = "none";
-          content.style.display = "flex"; // Yana contentni ko‘rsatamiz
-        } else {
-          profileSection.style.display = "block";
-          breadcrumbBox.style.display = "block";
-          content.style.display = "none"; // content_cards'ni yashiramiz
-        }
+});
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
 }
 
 

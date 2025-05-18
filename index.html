@@ -66,42 +66,46 @@
                         <p id="breadcrumbMain" >Ma'lumotlar</p>
                         <p id="breadcrumbSub">/ O‘quv yillari</p>
                     </div>
+                </div>
+    
+                <div id="fixedBottomRight" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background-color: #29303F; color: white; font-size: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+                    +
+                </div>
+    
+                <div class="teachers-years" id="teachersYears" style="display: none;">
+                    <input type="text" id="search" placeholder="Search">
+                    <div class="card-list" id="cardList">
+    
                     </div>
-
-                    <div class="teachers-years" id="teachersYears" style="display: none;">
-                        <input type="text" id="search" placeholder="Search">
-                        <div class="card-list" id="cardList">
-
-                        </div>
-                        <div class="plus-icon" id="addCardButton">
-                            <span class="plus-sign">+</span>
-                        </div>
-
-                        <div id="addCardModal" class="modal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    </div>
-                                <div class="modal-body">
-                                    <label for="newContent">Yangi o'quv yili kiriting:</label>
-                                    <input type="text" id="newContent" name="newContent">
+                    <div class="plus-icon" id="addCardButton">
+                        <span class="plus-sign">+</span>
+                    </div>
+    
+                    <div id="addCardModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
                                 </div>
-                                <div class="modal-footer" style="display: flex; justify-content: space-between;">
-                                    <span class="close-button" style="width: 100px; height: 45px; display: flex; justify-content: center; align-items: center; background-color: red; border-radius: 10px;">&times;</span>
-                                    <button id="saveCard">Saqlash</button>
-                                </div>
+                            <div class="modal-body">
+                                <label for="newContent">Yangi o'quv yili kiriting:</label>
+                                <input type="text" id="newContent" name="newContent">
+                            </div>
+                            <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                                <span class="close-button" style="width: 100px; height: 45px; display: flex; justify-content: center; align-items: center; background-color: red; border-radius: 10px;">&times;</span>
+                                <button id="saveCard">Saqlash</button>
                             </div>
                         </div>
-
-                        <div id="editModal" class="modal" style="display:none;">
-                            <div class="modal-content">
-                            <span class="close-btn">&times;</span>
-                            <h3>Edit card text</h3>
-                            <input type="text" id="editInput" />
-                            <button id="saveEditBtn">Save</button>
-                            </div>
-                        </div>
-
                     </div>
+    
+                    <div id="editModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                        <span class="close-btn">&times;</span>
+                        <h3>Edit card text</h3>
+                        <input type="text" id="editInput" />
+                        <button id="saveEditBtn">Save</button>
+                        </div>
+                    </div>
+    
+                </div>
                 <div class="content_cards">
                     <img src="./images/information.png" alt="" class="content_icon">
                     <p class="content_title">Ma'lumotlar</p>
@@ -128,7 +132,7 @@
                         </div>
                     </div>
                 </div>
-
+    
                 <div id="addUserModal" class="modal" style="display: none;">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
@@ -137,7 +141,7 @@
                         <button id="addUserBtn">Qo'shish</button>
                     </div>
                 </div>
-
+    
                 <div class="content_cards">
                     <img src="./images/year.png" alt="" class="content_icon">
                     <p class="content_title">O'quv yillari</p>
@@ -146,10 +150,12 @@
                     <img src="./images/humans.png" alt="" class="content_icon">
                     <p class="content_title">Kafedralar</p>
                 </div>
-                <div class="content_cards">
+    
+                <div class="content_cards" id="teachersCard">
                     <img src="./images/teachers.png" alt="" class="content_icon">
-                    <p class="content_title">O'qituvchilar</p>
+                    <p class="content_title">O‘qituvchilar</p>
                 </div>
+    
             </div>
             <div class="kafedralar-section" id="kafedralarSection" style="display: none;">
                 <div class="breadcrumb-box">
@@ -167,17 +173,19 @@
             </div>
         </main>
     </div>
-
-    <div id="kafedralarModal" class="modal" style="display: none;">
-        <div class="modal-content" style="width: 85%; height: 450px;">
-            <span class="close-btn" id="closeKafedraModal">&times;</span>
-            <div class="breadcrumb-box">
-                <h2>Malumotlar / Kafedralar</h2>
-            </div>
-            <div id="kafedralarContent" style="height: calc(450px - 60px); overflow-y: auto; padding: 15px;">
-                <p>Kafedralar bo'limiga xush kelibsiz! Bu yerda kafedralar haqida ma'lumotlar bo'ladi.</p>
-                </div>
-        </div>
+    
+    <div id="kafedralarModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal('kafedralarModal')">&times;</span>
+          <h2>Kafedralar bo‘limi</h2>
+          </div>
+    </div>
+    
+    <div id="teachersModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
+        <div class="modal-content">
+          <span class="close-button" onclick="closeModal('teachersModal')">&times;</span>
+          <h2>O‘qituvchilar bo‘limi</h2>
+          </div>
     </div>
 
 <script src="./Javascript/script.js"></script>
