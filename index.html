@@ -26,168 +26,189 @@
                     <p class="dashboard_title" data-nav>Dashboard</p>
                 </div>
                 <div class="dropdown-wrapper">
-                        <div class="dropdown-toggle">
-                        <img src="./images/information.png" alt="" class="info_icon">
-                        <p class="info_title" data-nav> Ma'lumotlar</p>
-                        <span id="arrow">&#9662;</span>
+                            <div class="dropdown-toggle">
+                            <img src="./images/information.png" alt="" class="info_icon">
+                            <p class="info_title" data-nav> Ma'lumotlar</p>
+                            <span id="arrow">&#9662;</span>
+                        </div>
+                            <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" style="margin-right: 1rem;"> <img src="./images/year.png" alt="" style="width: 1rem; height: 1rem;">O‘quv yillari</a>
+                            <a href="#" style="margin-right: 1rem;"> <img src="./images/humans.png" alt="" style="width: 1rem; height: 1rem;">Kafedralar</a>
+                            <a href="#" style="margin-right: 1rem;"> <img src="./images/teachers.png" alt="" style="width: 1rem; height: 1rem;">O‘qituvchilar</a>
+                        </div>
                     </div>
-                    <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#" style="margin-right: 1rem;"> <img src="./images/year.png" alt="" style="width: 1rem; height: 1rem;">O‘quv yillari</a>
-                        <a href="#" style="margin-right: 1rem;"> <img src="./images/humans.png" alt="" style="width: 1rem; height: 1rem;">Kafedralar</a>
-                        <a href="#" style="margin-right: 1rem;"> <img src="./images/teachers.png" alt="" style="width: 1rem; height: 1rem;">O‘qituvchilar</a>
+                    <div class="chat">
+                        <img src="./images/personchat.png" alt="chat" class="chat_img">
+                        <p class="chat_title" data-nav>Chat</p>
                     </div>
-                </div>
-                <div class="chat">
-                    <img src="./images/personchat.png" alt="chat" class="chat_img">
-                    <p class="chat_title" data-nav>Chat</p>
-                </div>
-                <div class="profile" onclick="toggleProfile()">
-                    <img src="./images/user.png" alt="profile" class="profile_img">
-                    <p class="profile_title" data-nav>Profile</p>
-                  </div>
+                    <div class="profile" onclick="toggleProfile()">
+                        <img src="./images/user.png" alt="profile" class="profile_img">
+                        <p class="profile_title" data-nav>Profile</p>
+                    </div>
+                    </div>
+
+                    <div id="profile-section" class="profile-container">
+                        <div class="profile-content">
+                            <div class="profile-avatar">
+                                <img src="./images/user.png" alt="avatar" class="avatar" />
+                            </div>
+                            <input type="text" placeholder="Ism" />
+                            <input type="text" placeholder="Fam" />
+                            <input type="text" placeholder="Login" />
+                            <input type="password" placeholder="Parol" />
+                            <button class="save-btn">Saqlash</button>
+                        </div>
                 </div>
 
-                <div id="profile-section" class="profile-container">
-                  <div class="profile-content">
-                    <div class="profile-avatar">
-                      <img src="./images/user.png" alt="avatar" class="avatar" />
+                <div class="content">
+                    <div class="breadcrumb-box" id="breadcrumbBox" style="display: none;">
+                        <div class="breadcrumb">
+                            <p id="breadcrumbMain" >Ma'lumotlar</p>
+                            <p id="breadcrumbSub">/ O‘quv yillari</p>
+                        </div>
                     </div>
-                    <input type="text" placeholder="Ism" />
-                    <input type="text" placeholder="Fam" />
-                    <input type="text" placeholder="Login" />
-                    <input type="password" placeholder="Parol" />
-                    <button class="save-btn">Saqlash</button>
-                  </div>
-            </div>
 
-            <div class="content">
-                <div class="breadcrumb-box" id="breadcrumbBox" style="display: none;">
-                    <div class="breadcrumb">
-                        <p id="breadcrumbMain" >Ma'lumotlar</p>
-                        <p id="breadcrumbSub">/ O‘quv yillari</p>
+                    <div id="fixedBottomRight" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background-color: #29303F; color: white; font-size: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+                        +
                     </div>
-                </div>
-    
-                <div id="fixedBottomRight" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background-color: #29303F; color: white; font-size: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer;">
-                    +
-                </div>
-    
-                <div class="teachers-years" id="teachersYears" style="display: none;">
-                    <input type="text" id="search" placeholder="Search">
-                    <div class="card-list" id="cardList">
-    
-                    </div>
-                    <div class="plus-icon" id="addCardButton">
-                        <span class="plus-sign">+</span>
-                    </div>
-    
-                    <div id="addCardModal" class="modal">
-                        <div class="modal-content">
-                            <div class="modal-header">
+
+                    <div class="teachers-years" id="teachersYears" style="display: none;">
+                        <input type="text" id="search" placeholder="Search">
+                        <div class="card-list" id="cardList">
+
+                        </div>
+                        <div class="plus-icon" id="addCardButton">
+                            <span class="plus-sign">+</span>
+                        </div>
+
+                        <div id="addCardModal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    </div>
+                                <div class="modal-body">
+                                    <label for="newContent">Yangi o'quv yili kiriting:</label>
+                                    <input type="text" id="newContent" name="newContent">
                                 </div>
-                            <div class="modal-body">
-                                <label for="newContent">Yangi o'quv yili kiriting:</label>
-                                <input type="text" id="newContent" name="newContent">
-                            </div>
-                            <div class="modal-footer" style="display: flex; justify-content: space-between;">
-                                <span class="close-button" style="width: 100px; height: 45px; display: flex; justify-content: center; align-items: center; background-color: red; border-radius: 10px;">&times;</span>
-                                <button id="saveCard">Saqlash</button>
+                                <div class="modal-footer" style="display: flex; justify-content: space-between;">
+                                    <span class="close-button" style="width: 100px; height: 45px; display: flex; justify-content: center; align-items: center; background-color: red; border-radius: 10px;">&times;</span>
+                                    <button id="saveCard">Saqlash</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div id="editModal" class="modal" style="display:none;">
-                        <div class="modal-content">
-                        <span class="close-btn">&times;</span>
-                        <h3>Edit card text</h3>
-                        <input type="text" id="editInput" />
-                        <button id="saveEditBtn">Save</button>
-                        </div>
-                    </div>
-    
-                </div>
-                <div class="content_cards">
-                    <img src="./images/information.png" alt="" class="content_icon">
-                    <p class="content_title">Ma'lumotlar</p>
-                </div>
-                <div class="content_cards" id="chatCard">
-                    <img src="./images/personchat.png" alt="" class="content_icon">
-                    <p class="content_title">Chat</p>
-                </div>
-                <div class="chat-window" id="chatWindow" style="display: none; margin-top: 20px;">
-                    <div class="chatLeft_window">
-                        <div class="user-list">
-                            <div class="user-item">Foydalanuvchi 1</div>
-                            <div class="user-item">Foydalanuvchi 2</div>
-                            <div class="user-item">Foydalanuvchi 3</div>
-                        </div>
-                        <div class="add-user-button">+</div>
-                    </div>
-                    <div class="chatRight_window">
-                        <div class="messages-container" id="messages">
-                            </div>
-                        <div class="input-area">
-                            <input type="text" id="messageInput" placeholder="Xabar yozing...">
-                            <img src="./images/telegram-icon.png" alt="" id="sendButton">
-                        </div>
-                    </div>
-                </div>
-    
-                <div id="addUserModal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <span class="close-button">&times;</span>
-                        <h3 style="font-size: 24px;">Yangi foydalanuvchi qo'shish</h3>
-                        <input type="text" id="newUsername" placeholder="Foydalanuvchi ismi">
-                        <button id="addUserBtn">Qo'shish</button>
-                    </div>
-                </div>
-    
-                <div class="content_cards">
-                    <img src="./images/year.png" alt="" class="content_icon">
-                    <p class="content_title">O'quv yillari</p>
-                </div>
-                <div class="content_cards" id="kafedralarCard">
-                    <img src="./images/humans.png" alt="" class="content_icon">
-                    <p class="content_title">Kafedralar</p>
-                </div>
-    
-                <div class="content_cards" id="teachersCard">
-                    <img src="./images/teachers.png" alt="" class="content_icon">
-                    <p class="content_title">O‘qituvchilar</p>
-                </div>
-    
-            </div>
-            <div class="kafedralar-section" id="kafedralarSection" style="display: none;">
-                <div class="breadcrumb-box">
-                    <h2>Malumotlar / Kafedralar</h2>
-                </div>
-            </div>
-                <div id="editKafedraModal" class="modal" style="display:none;">
-                    <div class="modal-content">
-                        <span class="close-btn">&times;</span>
-                        <h3>Kafedrani Tahrirlash</h3>
-                        <input type="text" id="editKafedraInput" />
-                        <button id="saveEditKafedraBtn">Saqlash</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-    
-    <div id="kafedralarModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
-        <div class="modal-content">
-          <span class="close-button" onclick="closeModal('kafedralarModal')">&times;</span>
-          <h2>Kafedralar bo‘limi</h2>
-          </div>
-    </div>
-    
-    <div id="teachersModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
-        <div class="modal-content">
-          <span class="close-button" onclick="closeModal('teachersModal')">&times;</span>
-          <h2>O‘qituvchilar bo‘limi</h2>
-          </div>
-    </div>
 
-<script src="./Javascript/script.js"></script>
-</body>
-</html>
+                        <div id="editModal" class="modal" style="display:none;">
+                            <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <h3>Edit card text</h3>
+                            <input type="text" id="editInput" />
+                            <button id="saveEditBtn">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="content_cards">
+                        <img src="./images/information.png" alt="" class="content_icon">
+                        <p class="content_title">Ma'lumotlar</p>
+                    </div>
+                    <div class="content_cards" id="chatCard">
+                        <img src="./images/personchat.png" alt="" class="content_icon">
+                        <p class="content_title">Chat</p>
+                    </div>
+                    <div class="chat-window" id="chatWindow" style="display: none; margin-top: 20px;">
+                        <div class="chatLeft_window">
+                            <div class="user-list">
+                                <div class="user-item">Foydalanuvchi 1</div>
+                                <div class="user-item">Foydalanuvchi 2</div>
+                                <div class="user-item">Foydalanuvchi 3</div>
+                            </div>
+                            <div class="add-user-button">+</div>
+                        </div>
+                        <div class="chatRight_window">
+                            <div class="messages-container" id="messages">
+                                </div>
+                            <div class="input-area">
+                                <input type="text" id="messageInput" placeholder="Xabar yozing...">
+                                <img src="./images/telegram-icon.png" alt="" id="sendButton">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="addUserModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h3 style="font-size: 24px;">Yangi foydalanuvchi qo'shish</h3>
+                            <input type="text" id="newUsername" placeholder="Foydalanuvchi ismi">
+                            <button id="addUserBtn">Qo'shish</button>
+                        </div>
+                    </div>
+
+                    <div class="content_cards">
+                        <img src="./images/year.png" alt="" class="content_icon">
+                        <p class="content_title">O'quv yillari</p>
+                    </div>
+                    <div class="content_cards" id="kafedralarCard">
+                        <img src="./images/humans.png" alt="" class="content_icon">
+                        <p class="content_title">Kafedralar</p>
+                    </div>
+
+                    <div class="content_cards" id="teachersCard">
+                        <img src="./images/teachers.png" alt="" class="content_icon">
+                        <p class="content_title">O‘qituvchilar</p>
+                    </div>
+
+                </div>
+                <div class="kafedralar-section" id="kafedralarSection" style="display: none;">
+                    <div class="breadcrumb-box">
+                        <h2>Malumotlar / Kafedralar</h2>
+                    </div>
+                </div>
+                    <div id="editKafedraModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <h3>Kafedrani Tahrirlash</h3>
+                            <input type="text" id="editKafedraInput" />
+                            <button id="saveEditKafedraBtn">Saqlash</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="kafedralarModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
+            <div class="modal-content">
+              <span class="close-button" onclick="closeModal('kafedralarModal')">&times;</span>
+              <h2>Kafedralar bo‘limi</h2>
+              </div>
+        </div>
+
+        <div id="teachersModal" class="modal" style="display: none; position: fixed; width: 85%; height: 400px;">
+            <div class="modal-content">
+              <span class="close-button" onclick="closeModal('teachersModal')">&times;</span>
+              <h2>O‘qituvchilar bo‘limi</h2>
+              </div>
+        </div>
+
+        <div id="addKafedraModalFull" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('addKafedraModalFull')">&times;</span>
+                <h3>Yangi Kafedra yaratish</h3>
+                <label for="newKafedraName">Yangi kafedra kiriting:</label>
+                <input type="text" id="newKafedraName" name="newKafedraName"><br><br>
+
+                <label for="selectOquvYili">O'quv yilini tanlang:</label>
+                <select id="selectOquvYili" name="selectOquvYili">
+                    </select><br><br>
+
+                <label for="newKafedraLogin">Login:</label>
+                <input type="text" id="newKafedraLogin" name="newKafedraLogin"><br><br>
+
+                <label for="newKafedraParol">Parol:</label>
+                <input type="password" id="newKafedraParol" name="newKafedraParol"><br><br>
+
+                <button id="saveNewKafedra">Saqlash</button>
+            </div>
+        </div>
+
+    <script src="./Javascript/script.js"></script>
+    </body>
+    </html>

@@ -26,6 +26,97 @@ document.addEventListener("DOMContentLoaded", function () {
     const kafedralarCard = document.getElementById("kafedralarCard");
     const teachersCard = document.getElementById("teachersCard");
     const fixedBottomRight = document.getElementById("fixedBottomRight");
+    const addKafedraModalFull = document.getElementById("addKafedraModalFull");
+    const newKafedraNameInput = document.getElementById("newKafedraName");
+    const selectOquvYiliSelect = document.getElementById("selectOquvYili");
+    const newKafedraLoginInput = document.getElementById("newKafedraLogin");
+    const newKafedraParolInput = document.getElementById("newKafedraParol");
+    const saveNewKafedraButton = document.getElementById("saveNewKafedra");
+    let kafedralar = JSON.parse(localStorage.getItem('kafedralarData')) || [];
+    let nextKafedraId = kafedralar.length > 0 ? Math.max(...kafedralar.map(k => k.id)) + 1 : 1;
+    const kafedralarList = document.getElementById('kafedralarList'); // Agar kafedralar ro'yxati uchun alohida div bo'lsa
+    const messageInput = document.getElementById('messageInput');
+    const messagesContainer = document.getElementById('messages');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatCard = document.getElementById('chatCard');
+    const topnavChat = document.querySelector('.chat');
+    const addUserButton = document.querySelector('.add-user-button');
+    const addUserModal = document.getElementById('addUserModal');
+    const closeButton = addUserModal.querySelector('.close-button');
+    const newUsernameInput = document.getElementById('newUsername');
+    const addUserBtn = document.getElementById('addUserBtn');
+    const userList = document.querySelector('.user-list');
+    const sendButton = document.getElementById('sendButton');
+
+
+    // Funksiyalar
+    function saveData(type) {
+        if (type === 'kafedra') {
+            localStorage.setItem('kafedralarData', JSON.stringify(kafedralar));
+        } else {
+            localStorage.setItem(localStorageKey, JSON.stringify(data));
+        }
+    }
+
+    function createCard(item, type) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-left">
+                <img src="./images/Bookmark.png" alt="icon" />
+                <span class="card-text">${item.name || item}</span>
+            </div>
+            <div class="card-right">
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="icon-btn edit" title="Edit">&#9998;</span>
+                <span class="icon-btn delete" title="Delete">&#128465;</span>
+            </div>
+        `;
+        const deleteBtn = card.querySelector('.delete');
+        const editBtn = card.querySelector('.edit');
+        const textSpan = card.querySelector('.card-text');
+        deleteBtn.addEventListener('click', () => {
+            let list = type === 'kafedra' ? kafedralar : data;
+            const index = list.indexOf(item.name || item);
+            if (index > -1) {
+                list.splice(index, 1);
+                saveData(type);
+            }
+            card.remove();
+        });
+        editBtn.addEventListener('click', () => {
+            currentEditingSpan = textSpan;
+            editInput.value = textSpan.textContent;
+            editModal.style.display = 'flex';
+        });
+        return card;
+    }
+
+    function loadCards(filter = "", type = 'yil') {
+        cardList.innerHTML = '';
+        let list = [];
+        if (type === 'kafedra') {
+            list = kafedralar.filter(k => k.name.toLowerCase().includes(filter.toLowerCase()));
+            list.forEach(item => cardList.appendChild(createCard({ name: item.name }, 'kafedra'))); // Kafedra obyekti sifatida saqlanadi
+        } else {
+            const filteredData = data.filter(item => item.toLowerCase().includes(filter.toLowerCase()));
+            filteredData.forEach(item => cardList.appendChild(createCard(item)));
+        }
+    }
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.content > div');
+        sections.forEach(section => section.style.display = 'none');
+        const sectionToShow = document.getElementById(sectionId);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
+        }
+        breadcrumbBox.style.display = sectionId !== 'dashboard' && sectionId !== 'profile-section' ? 'flex' : 'none';
+        fixedBottomRight.style.display = sectionId === 'teachersYears' ? 'flex' : 'none';
+    }
 
     // Funksiyalar
     function saveDataToLocalStorage() {
@@ -183,28 +274,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
-
-
-const sendButton = document.getElementById('sendButton');
-const messageInput = document.getElementById('messageInput');
-const messagesContainer = document.getElementById('messages');
-const chatWindow = document.getElementById('chatWindow');
-const chatCard = document.getElementById('chatCard');
-const topnavChat = document.querySelector('.chat');
-const breadcrumbBox = document.getElementById('breadcrumbBox');
-const breadcrumbMain = document.getElementById('breadcrumbMain');
-const breadcrumbSub = document.getElementById('breadcrumbSub');
-const contentCards = document.querySelectorAll('.content_cards');
-const teachersYears = document.getElementById('teachersYears');
-const addUserButton = document.querySelector('.add-user-button');
-const addUserModal = document.getElementById('addUserModal');
-const closeButton = addUserModal.querySelector('.close-button');
-const newUsernameInput = document.getElementById('newUsername');
-const addUserBtn = document.getElementById('addUserBtn');
-const userList = document.querySelector('.user-list');
 
 let messageCount = 0;
 const STORAGE_KEY = 'chatMessages';
