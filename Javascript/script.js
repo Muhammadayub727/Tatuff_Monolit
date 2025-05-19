@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function showSection(sectionId) {
+function showSection(sectionId) {
         const sections = document.querySelectorAll('.content > div');
         sections.forEach(section => section.style.display = 'none');
         const sectionToShow = document.getElementById(sectionId);
