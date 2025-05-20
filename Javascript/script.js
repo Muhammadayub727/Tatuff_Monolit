@@ -195,7 +195,7 @@ function showSection(sectionId) {
         item.addEventListener("click", function () {
             navItems.forEach(el => el.classList.remove("active-nav"));
             this.classList.add("active-nav");
-            const target = this.getAttribute('data-nav').toLowerCase();
+            const target = this.getAttribute('data-nav');
             breadcrumbMain.innerText = target.charAt(0).toUpperCase() + target.slice(1);
             breadcrumbSub.innerText = '';
             showSection(target === 'ma\'lumotlar' ? 'teachersYears' : target + 'Section');
@@ -371,12 +371,16 @@ function openChat() {
 }
 
 if (topnavChat) {
-    topnavChat.addEventListener('click', openChat);
+    topnavChat.addEventListener('click', () => {
+        showSection('chatWindow'); // yoki openChat()
+    });
 }
+
 
 if (chatCard) {
     chatCard.addEventListener('click', openChat);
 }
+
 
 contentCards.forEach(card => {
     if (card.id !== 'chatCard') {
@@ -436,5 +440,4 @@ window.addEventListener('keydown', (event) => {
         addUserModal.style.display = "none";
     }
 });
-
 loadMessages();
