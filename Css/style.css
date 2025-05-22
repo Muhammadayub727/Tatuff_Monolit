@@ -322,7 +322,7 @@
   }
   .teachers-years {
     width: 85%;
-    height: 500px;
+    height:400px;
     background-color: #1f2937;
     border-radius: 10px;
     overflow-y: auto; /* Vertikal scrollni avtomatik ravishda paydo qilish */
