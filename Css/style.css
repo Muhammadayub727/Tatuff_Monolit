@@ -508,7 +508,7 @@
   bottom: 40px; /* Ekranning pastki chetidan 40px */
   right: 40px;  /* Ekranning o‘ng chetidan 40px */
   background-color: #44475a;
-  right: 150px;
+  right: 10px;
   color: #f8f8f2;
   border-radius: 50%;
   display: flex;
