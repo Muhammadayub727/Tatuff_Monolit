@@ -504,24 +504,24 @@
 
 
 .plus-icon {
-
-  position: absolute;
-  bottom: 20px;
-  right: 170px;
-  background-color: #44475a; /* Dark plus icon background */
-  color: #f8f8f2; /* Light plus sign */
-  width: 30px;
-  height: 30px;
+  position: fixed; /* Muammoni hal qiladi */
+  bottom: 40px; /* Ekranning pastki chetidan 40px */
+  right: 40px;  /* Ekranning o‘ng chetidan 40px */
+  background-color: #44475a;
+  right: 150px;
+  color: #f8f8f2;
   border-radius: 50%;
   display: flex;
-    justify-content: center;
-    align-items: center;
-  font-size:35px;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
   cursor: pointer;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   width: 60px;
   height: 60px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Modaldan pastda qolib ketmasin deb */
 }
+
 
 
 .modal {
